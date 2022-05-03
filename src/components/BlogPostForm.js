@@ -1,47 +1,52 @@
-import React,{useState} from "react";
-import { StyleSheet,TextInput, Text,Button } from "react-native";
-import { View } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
-const BlogPostForm = ({onSubmit,initialBlogPost}) => {
-    const [title,setTitle] = useState(initialBlogPost.title);
-    const [content,setContent] = useState(initialBlogPost.content);
-    return (
-        <View style={Style.createStyle}>
-            <Text>Enter Title</Text>
-            <TextInput style={Style.textInputStyle} placeholder="Title" value={title} onChangeText={(text)=>{
-                setTitle(text)
-            }}/>
-            <Text>Enter Content</Text>
-            <TextInput style={Style.textInputStyle} placeholder="Content" value={content} onChangeText={(text)=>{
-                setContent(text)
-            }}/>
-            <Button title="Save" onPress={()=>onSubmit(title,content)}/>
-        </View>
-    );  
+const BlogPostForm = ({ onSubmit, initialValues }) => {
+  const [title, setTitle] = useState(initialValues.title);
+  const [content, setContent] = useState(initialValues.content);
+
+  console.log("Edit Screem 123->",initialValues);
+
+  return (
+    <View>
+      <Text style={styles.label}>Enter Title:</Text>
+      <TextInput
+        style={styles.input}
+        value={title}
+        onChangeText={text => setTitle(text)}
+      />
+      <Text style={styles.label}>Enter Content:</Text>
+      <TextInput
+        style={styles.input}
+        value={content}
+        onChangeText={text => setContent(text)}
+      />
+      <Button title="Save Blog Post" onPress={() => onSubmit(title, content)} />
+    </View>
+  );
 };
 
-BlogPostForm.defaultProps ={
-    initialBlogPost:{
-        title:"",
-        content:""
-    }
-}
+BlogPostForm.defaultProps = {
+  initialValues: {
+    title: '',
+    content: ''
+  }
+};
 
-const Style = StyleSheet.create(
-    {
-        createStyle:{
-            justifyContent:"center",
-            alignContent:"flex-end",
-            flexDirection:"column"
-        },
-        textInputStyle:{
-            borderWidth:1,
-            borderColor:"black"
-        }
-
-    }
-);
+const styles = StyleSheet.create({
+  input: {
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 15,
+    padding: 5,
+    margin: 5
+  },
+  label: {
+    fontSize: 20,
+    marginBottom: 5,
+    marginLeft: 5
+  }
+});
 
 export default BlogPostForm;
-
-
