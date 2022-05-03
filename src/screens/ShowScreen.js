@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { EvilIcons } from '@expo/vector-icons';
 
 const ShowScreen = ({ navigation }) => {
-  const { state } = useContext(Context);
+  const { state,getBlogPosts } = useContext(Context);
 
-  const blogPost = state.find(
+  let blogPost = state.find(
     (blogPost) => blogPost.id === navigation.getParam('id')
-  );
+  );  
 
   return (
     <View>
